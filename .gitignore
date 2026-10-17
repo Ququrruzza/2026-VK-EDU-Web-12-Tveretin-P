@@ -218,3 +218,11 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+
+
+.idea/
+.vscode/
+.DS_Store
+*.sqlite3
+Thumbs.db

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>How to build a moon park? - AskPupkin</title>
+    <link rel="icon" href="static/img/favicon.png">
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+
+<!-- m p - margin (внешний), padding (внутренний) оступы -->
+<!-- t b s e x y - верх низ слева справа горизонт верт -->
+
+<!-- ставь всех столбиком -->
+<body class="d-flex flex-column min-vh-100">
+
+    <header class="border-bottom py-3 mb-4 border-3">
+        <!-- благодаря нему надпись не прижимается к краю страницы -->
+        <div class="container">
+             <!-- разбить строку на 12 частей, с отступом между ними в g-2 (8 px) -->
+            <div class="row g-2 align-items-center">
+                
+                <!-- займи 6 ячеек, НО (благодаря col-md-auto) если экране шире 768 px, то будь таким же как строка пупкин -->
+                <div class="col-6 col-md-auto">
+                    <a href="index.html" class="logo">Ask<span>Pupkin</span></a>
+                </div>
+                
+                <!-- сейчас пойдут кнопки зарегаться войти, тк на мобилке поле поиска было бы ниже. order-md-last - чтобы оказались справа. А так забери длину строки, если ширина больше 768  -->
+                <div class="col-6 col-md-auto order-md-last text-end">
+                    <a href="login.html" class="me-2">Log in</a>
+                    <a href="signup.html">Register</a>
+                </div>
+                
+                <!-- займи все, но если col-md (шире 768 px, то займи остаток) -->
+                <div class="col-12 col-md">
+                    <!-- по умолчанию ставь в ряд с разделением в 8px -->
+                    <form class="d-flex gap-2" action="index.html"> 
+                        <!-- aria-label для незрячих - мобильная читалка из нее текст прочитает -->
+                        <input type="search" class="form-control" placeholder="Search" aria-label="Search">
+                        <a href="ask.html" class="btn btn-success text-nowrap">Ask!</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- flex-grow-1 - заебри себе все свободное место -->
+    <main class="container flex-grow-1">
+        <div class="row">
+            <!-- col-lg-9 - если шире 992px то занимай 3/4, иначе (телефон) - занимай все -->
+            <div class="col-lg-9 mb-4">
+                <!-- Сам вопрос -->
+                <div class="d-flex gap-3 mb-4">
+                <div class="flex-shrink-0">
+                    <img src="static/img/avatar-2.png" alt="Author avatar" class="avatar">
+                    <div class="rating">
+                        <button type="button" class="btn btn-sm btn-success" title="Like">&#9650;</button>
+                        <span class="rating-count">5</span>
+                        <button type="button" class="btn btn-sm btn-outline-danger" title="Dislike">&#9660;</button>
+                    </div>
+                </div>
+                <div class="flex-grow-1">
+                    <h2 class="question-title">How to build a moon park?</h2>
+                    <p class="card-text">I want to build an amusement park on the Moon: rides, cafes, maybe a small zoo. Where do I even start? What should I worry about first - air, gravity, or getting the materials there?</p>
+                    <div class="d-flex flex-wrap align-items-center gap-2 small">
+                    <span class="text-muted">Tags:</span>
+                    <a href="tag.html" class="badge text-bg-primary text-decoration-none">black-jack</a>
+                    <a href="tag.html" class="badge text-bg-primary text-decoration-none">bender</a>
+                    <span class="text-muted ms-auto">Asked 15 minutes ago by <a href="#">Mr. Freeman</a></span>
+                    </div>
+                </div>
+                </div>
+
+                <hr>
+                <h4 class="mb-3">3 Answers</h4>
+
+                <!-- Карточка ответа -->
+                <div class="card mb-3 border-success">
+                <div class="card-body">
+                    <div class="d-flex gap-3">
+                    <div class="flex-shrink-0">
+                        <img src="static/img/avatar-3.png" alt="Author avatar" class="avatar">
+                    <div class="rating">
+                        <button type="button" class="btn btn-sm btn-success" title="Like">&#9650;</button>
+                        <span class="rating-count">5</span>
+                        <button type="button" class="btn btn-sm btn-outline-danger" title="Dislike">&#9660;</button>
+                    </div>
+                    </div>
+                    <div class="flex-grow-1">
+                        <p class="card-text">Start with a pressurized dome: without an atmosphere, nothing else matters. Then plan the attractions for 1/6 gravity, because roller coasters will behave very differently there.</p>
+                        <div class="d-flex flex-wrap align-items-center gap-2 small">
+                        <div class="form-check mb-0">
+                            <input class="form-check-input" type="checkbox" id="correct-avatar-3" checked>
+                            <label class="form-check-label" for="correct-avatar-3">Correct!</label>
+                        </div>
+                        <span class="text-muted ms-auto">10 minutes ago</span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <!-- Карточка ответа -->
+                <div class="card mb-3">
+                <div class="card-body">
+                    <div class="d-flex gap-3">
+                    <div class="flex-shrink-0">
+                        <img src="static/img/avatar-4.png" alt="Author avatar" class="avatar">
+                    <div class="rating">
+                        <button type="button" class="btn btn-sm btn-outline-success" title="Like">&#9650;</button>
+                        <span class="rating-count">3</span>
+                        <button type="button" class="btn btn-sm btn-outline-danger" title="Dislike">&#9660;</button>
+                    </div>
+                    </div>
+                    <div class="flex-grow-1">
+                        <p class="card-text">Check out NASA’s Artemis program docs, they have a lot of info on building permanent structures on the Moon.</p>
+                        <div class="d-flex flex-wrap align-items-center gap-2 small">
+                        <div class="form-check mb-0">
+                            <input class="form-check-input" type="checkbox" id="correct-avatar-4">
+                            <label class="form-check-label" for="correct-avatar-4">Correct!</label>
+                        </div>
+                        <span class="text-muted ms-auto">5 minutes ago</span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <!-- Карточка ответа -->
+                <div class="card mb-3">
+                <div class="card-body">
+                    <div class="d-flex gap-3">
+                    <div class="flex-shrink-0">
+                        <img src="static/img/avatar-1.png" alt="Author avatar" class="avatar">
+                    <div class="rating">
+                        <button type="button" class="btn btn-sm btn-outline-success" title="Like">&#9650;</button>
+                        <span class="rating-count">-1</span>
+                        <button type="button" class="btn btn-sm btn-danger" title="Dislike">&#9660;</button>
+                    </div>
+                    </div>
+                    <div class="flex-grow-1">
+                        <p class="card-text">london is the capital of great britain.</p>
+                        <div class="d-flex flex-wrap align-items-center gap-2 small">
+                        <div class="form-check mb-0">
+                            <input class="form-check-input" type="checkbox" id="correct-avatar-1">
+                            <label class="form-check-label" for="correct-avatar-1">Correct!</label>
+                        </div>
+                        <span class="text-muted ms-auto">1 minute ago</span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <nav aria-label="Pages">
+                <ul class="pagination flex-wrap">
+                    <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+                    <li class="page-item active" aria-current="page"><span class="page-link">1</span></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item disabled"><span class="page-link">&hellip;</span></li>
+                    <li class="page-item"><a class="page-link" href="#">53</a></li>
+                    <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                </ul>
+                </nav>
+
+                <hr>
+
+                <!-- Форма ответа -->
+                <form>
+                <div class="mb-3">
+                    <label for="answer-text" class="form-label fw-bold">Your answer</label>
+                    <textarea class="form-control" id="answer-text" rows="5" maxlength="2000" placeholder="Enter your answer here..."></textarea>
+                    <div class="form-text">Up to 2000 characters.</div>
+                </div>
+                <button type="submit" class="btn btn-primary">Answer</button>
+                </form>
+            </div>
+            
+            <aside class="col-lg-3 mb-4 mt-lg-4">
+
+                <h3 class="mb-3">Popular Tags</h3>
+                <div class="tag-cloud mb-3 w-75">
+                    <a href="tag.html" class="text-secondary">perl</a>
+                    <a href="tag.html" class="text-danger fs-5">python</a>
+                    <a href="tag.html" class="text-dark">TechnoPark</a>
+                    <a href="tag.html" class="text-danger fs-5">MySQL</a>
+                    <a href="tag.html" class="text-success">django</a>
+                    <a href="tag.html" class="text-dark">Mail.Ru</a>
+                    <a href="tag.html" class="text-dark">Voloshin</a>
+                    <a href="tag.html" class="text-warning">Firefox</a>
+                </div>
+
+                <h3 class="mb-3">Best Members</h3>
+                <ul class="list-unstyled mb-0">
+                    <li class="mb-2"><a href="#">Mr. Freeman</a></li>
+                    <li class="mb-2"><a href="#">Dr. House</a></li>
+                    <li class="mb-2"><a href="#">Bender</a></li>
+                    <li class="mb-2"><a href="#">Queen Victoria</a></li>
+                    <li><a href="#">V. Pupkin</a></li>
+                </ul>
+            </aside>
+
+        </div>
+    </main>
+
+    <footer class="bg-light border-top py-3 mt-auto">
+        <div class="text-center text-muted small">
+            &copy; 2026 Крутая подпись (проект VK EDU - AskPupkin)
+        </div>
+        
+    </footer>
+
+<script src="static/js/bootstrap.js"></script>
+</body>
+</html> 

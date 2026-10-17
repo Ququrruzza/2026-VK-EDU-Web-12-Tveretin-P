@@ -1,0 +1,56 @@
+.logo {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: rgb(31, 25, 25);
+    text-decoration: none;
+}
+
+.logo span {
+    color:#0d6efd;
+}
+
+.tag-cloud a {
+  text-decoration: none;
+  margin-right: 8px;
+  display: inline-block;
+}
+
+
+.avatar {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.avatar-sm {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.avatar-lg {
+  width: 120px;
+  height: 120px;
+}
+
+.rating {
+  width: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  margin-top: 8px;
+}
+.rating .btn {
+  width: 36px;
+  padding: 0;
+  line-height: 1.6;
+}
+.rating-count {
+  font-weight: 700;
+}
+
+
+.card-text,
+.question-title {
+  overflow-wrap: anywhere;
+}

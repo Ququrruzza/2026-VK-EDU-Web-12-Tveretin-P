@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ask a Question - AskPupkin</title>
+    <link rel="icon" href="static/img/favicon.png">
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+
+<!-- m p - margin (внешний), padding (внутренний) оступы -->
+<!-- t b s e x y - верх низ слева справа горизонт верт -->
+
+<!-- ставь всех столбиком -->
+<body class="d-flex flex-column min-vh-100">
+
+    <header class="border-bottom py-3 mb-4 border-3">
+        <!-- благодаря нему надпись не прижимается к краю страницы -->
+        <div class="container">
+             <!-- разбить строку на 12 частей, с отступом между ними в g-2 (8 px) -->
+            <div class="row g-2 align-items-center">
+                
+                <!-- займи 6 ячеек, НО (благодаря col-md-auto) если экране шире 768 px, то будь таким же как строка пупкин -->
+                <div class="col-6 col-md-auto">
+                    <a href="index.html" class="logo">Ask<span>Pupkin</span></a>
+                </div>
+                
+                <!-- сейчас пойдут кнопки зарегаться войти, тк на мобилке поле поиска было бы ниже. order-md-last - чтобы оказались справа. А так забери длину строки, если ширина больше 768  -->
+                <div class="col-6 col-md-auto order-md-last text-end">
+                    <a href="login.html" class="me-2">Log in</a>
+                    <a href="signup.html">Register</a>
+                </div>
+                
+                <!-- займи все, но если col-md (шире 768 px, то займи остаток) -->
+                <div class="col-12 col-md">
+                    <!-- по умолчанию ставь в ряд с разделением в 8px -->
+                    <form class="d-flex gap-2" action="index.html"> 
+                        <!-- aria-label для незрячих - мобильная читалка из нее текст прочитает -->
+                        <input type="search" class="form-control" placeholder="Search" aria-label="Search">
+                        <a href="ask.html" class="btn btn-success text-nowrap">Ask!</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- flex-grow-1 - заебри себе все свободное место -->
+    <main class="container flex-grow-1">
+        <div class="row">
+            <!-- col-lg-9 - если шире 992px то занимай 3/4, иначе (телефон) - занимай все -->
+            <div class="col-lg-9 mb-4">
+                <h2 class="mb-4">New Question</h2>
+
+                <!-- Ошибка всей формы -->
+                <div class="alert alert-danger">Please fix the errors below.</div>
+
+                <form>
+                    <div class="row mb-3">
+                        <label for="title" class="col-sm-2 col-form-label">Title</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="title" name="title" maxlength="120" value="How to build a moon park?" placeholder="Short and clear, up to 120 characters.">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="text" class="col-sm-2 col-form-label">Text</label>
+                        <div class="col-sm-10">
+                        <!-- is-invalid + invalid-feedback = ошибка поля -->
+                        <textarea class="form-control is-invalid" id="text" name="text" rows="8" maxlength="5000" placeholder="Describe your problem in detail, up to 5000 characters."></textarea>
+                        <div class="invalid-feedback">Text of the question is required.</div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="tags" class="col-sm-2 col-form-label">Tags</label>
+                        <div class="col-sm-10">
+                        <input type="text" class="form-control" id="tags" name="tags" maxlength="100" value="moon, park, puzzle" placeholder="Up to 3 tags">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-10 offset-sm-2">
+                        <button type="submit" class="btn btn-success">Ask!</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <aside class="col-lg-3 mb-4 mt-lg-4">
+
+                <h3 class="mb-3">Popular Tags</h3>
+                <div class="tag-cloud mb-3 w-75">
+                    <a href="tag.html" class="text-secondary">perl</a>
+                    <a href="tag.html" class="text-danger fs-5">python</a>
+                    <a href="tag.html" class="text-dark">TechnoPark</a>
+                    <a href="tag.html" class="text-danger fs-5">MySQL</a>
+                    <a href="tag.html" class="text-success">django</a>
+                    <a href="tag.html" class="text-dark">Mail.Ru</a>
+                    <a href="tag.html" class="text-dark">Voloshin</a>
+                    <a href="tag.html" class="text-warning">Firefox</a>
+                </div>
+
+                <h3 class="mb-3">Best Members</h3>
+                <ul class="list-unstyled mb-0">
+                    <li class="mb-2"><a href="#">Mr. Freeman</a></li>
+                    <li class="mb-2"><a href="#">Dr. House</a></li>
+                    <li class="mb-2"><a href="#">Bender</a></li>
+                    <li class="mb-2"><a href="#">Queen Victoria</a></li>
+                    <li><a href="#">V. Pupkin</a></li>
+                </ul>
+            </aside>
+
+        </div>
+    </main>
+
+    <footer class="bg-light border-top py-3 mt-auto">
+        <div class="text-center text-muted small">
+            &copy; 2026 Крутая подпись (проект VK EDU - AskPupkin)
+        </div>
+        
+    </footer>
+
+<script src="static/js/bootstrap.js"></script>
+</body>
+</html> 
