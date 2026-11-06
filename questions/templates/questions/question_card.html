@@ -1,0 +1,22 @@
+<div class="card mb-3">
+<div class="card-body">
+    <div class="d-flex gap-3">
+    <div class="flex-shrink-0">
+        {% include "core/avatar.html" with person=question.author %}
+        {% include "questions/rating.html" with item=question %}
+    </div>
+    <div class="flex-grow-1">
+        <h5 class="question-title"><a href="{% url 'question' question.id %}" class="text-decoration-none">{{ question.title }}</a></h5>
+        <p class="card-text">{{ question.text|truncatechars:120 }}</p>
+        <div class="d-flex flex-wrap align-items-center gap-2 small">
+        <a href="{% url 'question' question.id %}">Answers ({{ question.answers_count }})</a>
+        <span class="text-muted">Tags:</span>
+        {% for tag in question.tags %}
+        <a href="{% url 'tag' tag %}" class="badge text-bg-primary text-decoration-none">{{ tag }}</a>
+        {% endfor %}
+        <span class="text-muted ms-auto">{{ question.created }}</span>
+        </div>
+    </div>
+    </div>
+</div>
+</div>

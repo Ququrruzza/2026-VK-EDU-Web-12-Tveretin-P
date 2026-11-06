@@ -1,120 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "core/base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sign up - AskPupkin</title>
-    <link rel="icon" href="static/img/favicon.png">
-    <link rel="stylesheet" href="static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="static/css/style.css">
-</head>
+{% block title %}Sign up{% endblock %}
 
-<body class="d-flex flex-column min-vh-100">
+{% block content %}
+<div style="max-width: 500px;">
+<h2 class="mb-4">Registration</h2>
 
-    <header class="border-bottom py-3 mb-4 border-3">
-        <div class="container">
-            <div class="row g-2 align-items-center">
-                
-                <div class="col-6 col-md-auto">
-                    <a href="index.html" class="logo">Ask<span>Pupkin</span></a>
-                </div>
-                
-                <div class="col-6 col-md-auto order-md-last text-end">
-                    <a href="login.html" class="me-2">Log in</a>
-                    <a href="signup.html">Register</a>
-                </div>
-                
-                <div class="col-12 col-md">
-                    <form class="d-flex gap-2" action="index.html"> 
-                        <input type="search" class="form-control" placeholder="Search" aria-label="Search">
-                        <a href="ask.html" class="btn btn-success text-nowrap">Ask!</a>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </header>
+<div class="alert alert-danger">Sorry, this email address is already registered!</div>
 
-    <main class="container flex-grow-1">
-        <div class="row">
-            <div class="col-lg-9 mb-4">
-                <div style="max-width: 500px;">
-                <h2 class="mb-4">Registration</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3">
+    <label for="login" class="form-label">Login</label>
+    <input type="text" class="form-control" id="login" name="login" maxlength="30" value="dr_pepper">
+    <div class="form-text">3-30 characters: latin letters, digits and "_".</div>
+    </div>
+    <div class="mb-3">
+    <label for="email" class="form-label">Email</label>
+    <input type="email" class="form-control is-invalid" id="email" name="email" maxlength="100" value="drpepper@mail">
+    <div class="invalid-feedback">Please enter a valid email.</div>
+    </div>
+    <div class="mb-3">
+    <label for="nickname" class="form-label">Nickname</label>
+    <input type="text" class="form-control" id="nickname" name="nickname" maxlength="30" value="Dr. Pepper">
+    <div class="form-text">This name will be shown to other users.</div>
+    </div>
+    <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input type="password" class="form-control" id="password" name="password" maxlength="64">
+    <div class="form-text">At least 8 characters.</div>
+    </div>
+    <div class="mb-3">
+    <label for="password2" class="form-label">Repeat password</label>
+    <input type="password" class="form-control is-invalid" id="password2" name="password2" maxlength="64">
+    <div class="invalid-feedback">Passwords do not match.</div>
+    </div>
+    <div class="mb-3">
+    <label for="avatar" class="form-label">Avatar</label>
+    <input type="file" class="form-control" id="avatar" name="avatar" accept="image/*">
+    <div class="form-text">JPG or PNG, up to 2 MB. Optional.</div>
+    </div>
+    <button type="submit" class="btn btn-primary mb-3">Register!</button>
+</form>
 
-                <div class="alert alert-danger">Sorry, this email address is already registered!</div>
-
-                <form>
-                    <div class="mb-3">
-                    <label for="login" class="form-label">Login</label>
-                    <input type="text" class="form-control" id="login" maxlength="30" value="dr_pepper">
-                    <div class="form-text">3-30 characters: latin letters, digits and "_".</div>
-                    </div>
-                    <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control is-invalid" id="email" maxlength="100" value="drpepper@mail">
-                    <div class="invalid-feedback">Please enter a valid email.</div>
-                    </div>
-                    <div class="mb-3">
-                    <label for="nickname" class="form-label">Nickname</label>
-                    <input type="text" class="form-control" id="nickname" maxlength="30" value="Dr. Pepper">
-                    <div class="form-text">This name will be shown to other users.</div>
-                    </div>
-                    <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" maxlength="64">
-                    <div class="form-text">At least 8 characters.</div>
-                    </div>
-                    <div class="mb-3">
-                    <label for="password2" class="form-label">Repeat password</label>
-                    <input type="password" class="form-control is-invalid" id="password2" maxlength="64">
-                    <div class="invalid-feedback">Passwords do not match.</div>
-                    </div>
-                    <div class="mb-3">
-                    <label for="avatar" class="form-label">Avatar</label>
-                    <input type="file" class="form-control" id="avatar" accept="image/*">
-                    <div class="form-text">JPG or PNG, up to 2 MB. Optional.</div>
-                    </div>
-                    <button type="submit" class="btn btn-primary mb-3">Register!</button>
-                </form>
-
-                <p>Already have an account? <a href="login.html">Log in</a></p>
-                </div>
-            </div>
-            
-            <aside class="col-lg-3 mb-4 mt-lg-4">
-
-                <h3 class="mb-3">Popular Tags</h3>
-                <ul class="tag-cloud list-unstyled mb-3 w-75">
-                    <li><a href="tag.html" class="text-secondary">perl</a></li>
-                    <li><a href="tag.html" class="text-danger fs-5">python</a></li>
-                    <li><a href="tag.html" class="text-dark">TechnoPark</a></li>
-                    <li><a href="tag.html" class="text-danger fs-5">MySQL</a></li>
-                    <li><a href="tag.html" class="text-success">django</a></li>
-                    <li><a href="tag.html" class="text-dark">Mail.Ru</a></li>
-                    <li><a href="tag.html" class="text-dark">Voloshin</a></li>
-                    <li><a href="tag.html" class="text-warning">Firefox</a></li>
-                </ul>
-
-                <h3 class="mb-3">Best Members</h3>
-                <ul class="list-unstyled mb-0">
-                    <li class="mb-2"><a href="#">Mr. Freeman</a></li>
-                    <li class="mb-2"><a href="#">Dr. House</a></li>
-                    <li class="mb-2"><a href="#">Bender</a></li>
-                    <li class="mb-2"><a href="#">Queen Victoria</a></li>
-                    <li><a href="#">V. Pupkin</a></li>
-                </ul>
-            </aside>
-
-        </div>
-    </main>
-
-    <footer class="bg-light border-top py-3 mt-auto">
-        <div class="text-center text-muted small">
-            &copy; 2026 Крутая подпись (проект VK EDU - AskPupkin)
-        </div>
-        
-    </footer>
-
-<script src="static/js/bootstrap.js"></script>
-</body>
-</html> 
+<p>Already have an account? <a href="{% url 'login' %}">Log in</a></p>
+</div>
+{% endblock %}
