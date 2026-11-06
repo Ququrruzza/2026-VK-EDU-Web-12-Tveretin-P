@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %} - AskPupkin</title>
+    <link rel="icon" href="{% static 'core/img/favicon.png' %}">
+    <link rel="stylesheet" href="{% static 'core/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+    <header class="border-bottom py-3 mb-4 border-3">
+        <div class="container">
+            <div class="row g-2 align-items-center">
+
+                <div class="col-6 col-md-auto">
+                    <a href="{% url 'index' %}" class="logo">Ask<span>Pupkin</span></a>
+                </div>
+
+                {% if current_user %}
+                <div class="col-6 col-md-auto order-md-last d-flex align-items-center justify-content-end gap-2">
+                    {% include "core/avatar.html" with person=current_user size="avatar-sm" %}
+                    <div class="small">
+                        <div class="fw-bold">{{ current_user.name }}</div>
+                        <a href="{% url 'profile' %}" class="me-2">Settings</a>
+                        <a href="{% url 'index' %}">Log out</a>
+                    </div>
+                </div>
+                {% else %}
+                <div class="col-6 col-md-auto order-md-last text-end">
+                    <a href="{% url 'login' %}" class="me-2">Log in</a>
+                    <a href="{% url 'signup' %}">Register</a>
+                </div>
+                {% endif %}
+
+                <div class="col-12 col-md">
+                    <form class="d-flex gap-2" action="{% url 'index' %}">
+                        <input type="search" class="form-control" name="q" placeholder="Search" aria-label="Search">
+                        <a href="{% url 'ask' %}" class="btn btn-success text-nowrap">Ask!</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container flex-grow-1">
+        <div class="row">
+            <div class="col-lg-9 mb-4">
+                {% block content %}{% endblock %}
+            </div>
+
+            <aside class="col-lg-3 mb-4 mt-lg-4">
+                <h3 class="mb-3">Popular Tags</h3>
+                <ul class="tag-cloud list-unstyled mb-3 w-75">
+                    {% for tag in popular_tags %}
+                        <li><a href="{% url 'tag' tag.name %}" class="{{ tag.css }}">{{ tag.name }}</a></li>
+                    {% endfor %}
+                </ul>
+
+                <h3 class="mb-3">Best Members</h3>
+                <ul class="list-unstyled mb-0">
+                    {% for member in best_members %}
+                        <li{% if not forloop.last %} class="mb-2"{% endif %}><a href="#">{{ member.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </aside>
+
+        </div>
+    </main>
+
+    <footer class="bg-light border-top py-3 mt-auto">
+        <div class="text-center text-muted small">
+            &copy; 2026 Крутая подпись (проект VK EDU - AskPupkin)
+        </div>
+    </footer>
+
+<script src="{% static 'core/js/bootstrap.js' %}"></script>
+</body>
+</html>

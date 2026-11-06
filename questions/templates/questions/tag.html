@@ -1,0 +1,15 @@
+{% extends "core/base.html" %}
+
+{% block title %}Tag: {{ tag_name }}{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Tag: {{ tag_name }}</h2>
+
+{% for question in page %}
+{% include "questions/question_card.html" %}
+{% empty %}
+<p class="text-muted">No questions with this tag yet.</p>
+{% endfor %}
+
+{% include "core/paginator.html" %}
+{% endblock %}

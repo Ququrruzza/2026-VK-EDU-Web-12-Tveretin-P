@@ -1,0 +1,20 @@
+<div class="card mb-3{% if answer.is_correct %} border-success{% endif %}">
+<div class="card-body">
+    <div class="d-flex gap-3">
+    <div class="flex-shrink-0">
+        {% include "core/avatar.html" with person=answer.author %}
+        {% include "questions/rating.html" with item=answer %}
+    </div>
+    <div class="flex-grow-1">
+        <p class="card-text">{{ answer.text }}</p>
+        <div class="d-flex flex-wrap align-items-center gap-2 small">
+        <div class="form-check mb-0">
+            <input class="form-check-input" type="checkbox" id="correct-{{ answer.id }}"{% if answer.is_correct %} checked{% endif %}>
+            <label class="form-check-label" for="correct-{{ answer.id }}">Correct!</label>
+        </div>
+        <span class="text-muted ms-auto">{{ answer.created }}</span>
+        </div>
+    </div>
+    </div>
+</div>
+</div>

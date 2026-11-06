@@ -1,0 +1,6 @@
+{% load static %}
+{% if person.avatar %}
+    <img src="{% static person.avatar %}" alt="{{ person.name }}" class="avatar {{ size }}">
+{% else %}
+    <span class="avatar avatar-placeholder {{ size }}" style="background-color: {{ person.color }}" role="img" aria-label="{{ person.name }}">{{ person.initials }}</span>
+{% endif %}

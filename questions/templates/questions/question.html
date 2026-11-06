@@ -1,0 +1,46 @@
+{% extends "core/base.html" %}
+
+{% block title %}{{ question.title }}{% endblock %}
+
+{% block content %}
+<div class="d-flex gap-3 mb-4">
+<div class="flex-shrink-0">
+    {% include "core/avatar.html" with person=question.author %}
+    {% include "questions/rating.html" with item=question %}
+</div>
+<div class="flex-grow-1">
+    <h2 class="question-title">{{ question.title }}</h2>
+    <p class="card-text">{{ question.text }}</p>
+    <div class="d-flex flex-wrap align-items-center gap-2 small">
+    <span class="text-muted">Tags:</span>
+    {% for tag in question.tags %}
+    <a href="{% url 'tag' tag %}" class="badge text-bg-primary text-decoration-none">{{ tag }}</a>
+    {% endfor %}
+    <span class="text-muted ms-auto">Asked {{ question.created }} by <a href="#">{{ question.author.name }}</a></span>
+    </div>
+</div>
+</div>
+
+<hr>
+<h4 class="mb-3">{{ question.answers_count }} Answers</h4>
+
+{% for answer in page %}
+{% include "questions/answer_card.html" %}
+{% empty %}
+<p class="text-muted">No answers yet. Be the first!</p>
+{% endfor %}
+
+{% include "core/paginator.html" %}
+
+<hr>
+
+<form method="post">
+{% csrf_token %}
+<div class="mb-3">
+    <label for="answer-text" class="form-label fw-bold">Your answer</label>
+    <textarea class="form-control" id="answer-text" name="text" rows="5" maxlength="2000" placeholder="Enter your answer here..."></textarea>
+    <div class="form-text">Up to 2000 characters.</div>
+</div>
+<button type="submit" class="btn btn-primary">Answer</button>
+</form>
+{% endblock %}

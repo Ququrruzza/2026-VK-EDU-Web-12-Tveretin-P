@@ -1,0 +1,27 @@
+{% extends "core/base.html" %}
+
+{% block title %}Log in{% endblock %}
+
+{% block content %}
+<div style="max-width: 500px;">
+<h2 class="mb-4">Log In</h2>
+
+<div class="alert alert-danger">Wrong login or password!</div>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+    <label for="login" class="form-label">Login</label>
+    <input type="text" class="form-control" id="login" name="login" maxlength="30" placeholder="Enter your login here">
+    </div>
+    <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input type="password" class="form-control is-invalid" id="password" name="password" maxlength="64">
+    <div class="invalid-feedback">Enter your password.</div>
+    </div>
+    <button type="submit" class="btn btn-primary mb-3">Log in!</button>
+</form>
+
+<p>No account yet? <a href="{% url 'signup' %}">Create new account</a></p>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "core/base.html" %}
+
+{% block title %}New Questions{% endblock %}
+
+{% block content %}
+    <div class="d-flex align-items-baseline gap-3 mb-4">
+        <h2 class="mb-0">New Questions</h2>
+        <a href="{% url 'hot' %}">Hot Questions</a>
+    </div>
+
+    {% for question in page %}
+        {% include "questions/question_card.html" %}
+    {% endfor %}
+
+    {% include "core/paginator.html" %}
+{% endblock %}

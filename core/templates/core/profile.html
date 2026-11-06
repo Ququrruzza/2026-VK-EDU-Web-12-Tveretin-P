@@ -1,0 +1,41 @@
+{% extends "core/base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Settings: {{ current_user.name }}</h2>
+
+<div class="alert alert-danger">Profile was not saved. Please fix the errors below.</div>
+
+<form method="post" enctype="multipart/form-data" style="max-width: 600px;">
+{% csrf_token %}
+<div class="mb-3">
+    <label for="login" class="form-label">Login</label>
+    <input type="text" class="form-control" id="login" name="login" maxlength="30" value="{{ current_user.login }}" disabled>
+    <div class="form-text">Login cannot be changed.</div>
+</div>
+<div class="mb-3">
+    <label for="email" class="form-label">Email</label>
+    <input type="email" class="form-control is-invalid" id="email" name="email" maxlength="100" value="{{ current_user.email }}">
+    <div class="invalid-feedback">Please enter a valid email.</div>
+</div>
+<div class="mb-3">
+    <label for="nickname" class="form-label">Nickname</label>
+    <input type="text" class="form-control" id="nickname" name="nickname" maxlength="30" value="{{ current_user.name }}">
+    <div class="form-text">Up to 30 characters.</div>
+</div>
+
+<div class="mb-3">
+    <label for="avatar" class="form-label">Avatar</label>
+    <div class="d-flex flex-wrap align-items-center gap-3">
+    {% include "core/avatar.html" with person=current_user size="avatar-lg" %}
+    <div class="flex-grow-1">
+        <input type="file" class="form-control" id="avatar" name="avatar" accept="image/*">
+        <div class="form-text">JPG or PNG, up to 2 MB.</div>
+    </div>
+    </div>
+</div>
+
+<button type="submit" class="btn btn-primary">Save</button>
+</form>
+{% endblock %}

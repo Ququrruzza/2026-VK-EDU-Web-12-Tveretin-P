@@ -226,3 +226,9 @@ __marimo__/
 .DS_Store
 *.sqlite3
 Thumbs.db
+
+
+
+# Django
+/static/
+/media/
