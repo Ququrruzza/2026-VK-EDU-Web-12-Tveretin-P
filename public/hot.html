@@ -10,34 +10,23 @@
     <link rel="stylesheet" href="static/css/style.css">
 </head>
 
-<!-- m p - margin (внешний), padding (внутренний) оступы -->
-<!-- t b s e x y - верх низ слева справа горизонт верт -->
-
-<!-- ставь всех столбиком -->
 <body class="d-flex flex-column min-vh-100">
 
     <header class="border-bottom py-3 mb-4 border-3">
-        <!-- благодаря нему надпись не прижимается к краю страницы -->
         <div class="container">
-             <!-- разбить строку на 12 частей, с отступом между ними в g-2 (8 px) -->
             <div class="row g-2 align-items-center">
                 
-                <!-- займи 6 ячеек, НО (благодаря col-md-auto) если экране шире 768 px, то будь таким же как строка пупкин -->
                 <div class="col-6 col-md-auto">
                     <a href="index.html" class="logo">Ask<span>Pupkin</span></a>
                 </div>
                 
-                <!-- сейчас пойдут кнопки зарегаться войти, тк на мобилке поле поиска было бы ниже. order-md-last - чтобы оказались справа. А так забери длину строки, если ширина больше 768  -->
                 <div class="col-6 col-md-auto order-md-last text-end">
                     <a href="login.html" class="me-2">Log in</a>
                     <a href="signup.html">Register</a>
                 </div>
                 
-                <!-- займи все, но если col-md (шире 768 px, то займи остаток) -->
                 <div class="col-12 col-md">
-                    <!-- по умолчанию ставь в ряд с разделением в 8px -->
                     <form class="d-flex gap-2" action="index.html"> 
-                        <!-- aria-label для незрячих - мобильная читалка из нее текст прочитает -->
                         <input type="search" class="form-control" placeholder="Search" aria-label="Search">
                         <a href="ask.html" class="btn btn-success text-nowrap">Ask!</a>
                     </form>
@@ -46,22 +35,19 @@
         </div>
     </header>
 
-    <!-- flex-grow-1 - заебри себе все свободное место -->
     <main class="container flex-grow-1">
         <div class="row">
-            <!-- col-lg-9 - если шире 992px то занимай 3/4, иначе (телефон) - занимай все -->
             <div class="col-lg-9 mb-4">
                 <div class="d-flex align-items-baseline gap-3 mb-4">
                 <h2 class="mb-0">Hot Questions</h2>
                 <a href="index.html">New Questions</a>
                 </div>
 
-                <!-- Карточка вопроса -->
                 <div class="card mb-3">
                 <div class="card-body">
                     <div class="d-flex gap-3">
                     <div class="flex-shrink-0">
-                        <img src="static/img/avatar-2.png" alt="Author avatar" class="avatar">
+                        <span class="avatar avatar-placeholder" style="background-color: #198754" role="img" aria-label="Mr. Freeman">MF</span>
                     <div class="rating">
                         <button type="button" class="btn btn-sm btn-success" title="Like">&#9650;</button>
                         <span class="rating-count">5</span>
@@ -83,12 +69,11 @@
                 </div>
                 </div>
 
-                <!-- Карточка вопроса -->
                 <div class="card mb-3">
                 <div class="card-body">
                     <div class="d-flex gap-3">
                     <div class="flex-shrink-0">
-                        <img src="static/img/avatar-3.png" alt="Author avatar" class="avatar">
+                        <span class="avatar avatar-placeholder" style="background-color: #dc3545" role="img" aria-label="Dr. House">DH</span>
                     <div class="rating">
                         <button type="button" class="btn btn-sm btn-outline-success" title="Like">&#9650;</button>
                         <span class="rating-count">12</span>
@@ -110,12 +95,11 @@
                 </div>
                 </div>
 
-                <!-- Карточка вопроса -->
                 <div class="card mb-3">
                 <div class="card-body">
                     <div class="d-flex gap-3">
                     <div class="flex-shrink-0">
-                        <img src="static/img/avatar-4.png" alt="Author avatar" class="avatar">
+                        <span class="avatar avatar-placeholder" style="background-color: #6f42c1" role="img" aria-label="Bender">B</span>
                     <div class="rating">
                         <button type="button" class="btn btn-sm btn-outline-success" title="Like">&#9650;</button>
                         <span class="rating-count">0</span>
@@ -137,7 +121,6 @@
                 </div>
                 </div>
 
-                <!-- Пагинатор: active - текущая страница, disabled - неактивные элементы -->
                 <nav aria-label="Pages">
                 <ul class="pagination flex-wrap">
                     <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
@@ -154,16 +137,16 @@
             <aside class="col-lg-3 mb-4 mt-lg-4">
 
                 <h3 class="mb-3">Popular Tags</h3>
-                <div class="tag-cloud mb-3 w-75">
-                    <a href="tag.html" class="text-secondary">perl</a>
-                    <a href="tag.html" class="text-danger fs-5">python</a>
-                    <a href="tag.html" class="text-dark">TechnoPark</a>
-                    <a href="tag.html" class="text-danger fs-5">MySQL</a>
-                    <a href="tag.html" class="text-success">django</a>
-                    <a href="tag.html" class="text-dark">Mail.Ru</a>
-                    <a href="tag.html" class="text-dark">Voloshin</a>
-                    <a href="tag.html" class="text-warning">Firefox</a>
-                </div>
+                <ul class="tag-cloud list-unstyled mb-3 w-75">
+                    <li><a href="tag.html" class="text-secondary">perl</a></li>
+                    <li><a href="tag.html" class="text-danger fs-5">python</a></li>
+                    <li><a href="tag.html" class="text-dark">TechnoPark</a></li>
+                    <li><a href="tag.html" class="text-danger fs-5">MySQL</a></li>
+                    <li><a href="tag.html" class="text-success">django</a></li>
+                    <li><a href="tag.html" class="text-dark">Mail.Ru</a></li>
+                    <li><a href="tag.html" class="text-dark">Voloshin</a></li>
+                    <li><a href="tag.html" class="text-warning">Firefox</a></li>
+                </ul>
 
                 <h3 class="mb-3">Best Members</h3>
                 <ul class="list-unstyled mb-0">

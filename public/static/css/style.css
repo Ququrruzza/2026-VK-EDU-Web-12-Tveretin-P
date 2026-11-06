@@ -9,10 +9,12 @@
     color:#0d6efd;
 }
 
+.tag-cloud li {
+  display: inline-block;
+  margin-right: 8px;
+}
 .tag-cloud a {
   text-decoration: none;
-  margin-right: 8px;
-  display: inline-block;
 }
 
 
@@ -30,6 +32,21 @@
 .avatar-lg {
   width: 120px;
   height: 120px;
+}
+.avatar-placeholder {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  user-select: none;
+}
+.avatar-sm.avatar-placeholder {
+  font-size: 0.9rem;
+}
+.avatar-lg.avatar-placeholder {
+  font-size: 2.5rem;
 }
 
 .rating {
