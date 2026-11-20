@@ -8,6 +8,9 @@
 ## ДЗ 3 - база данных
 Сделаны модели, админка и команда для заполнения базы тестовыми данными
 
+## ДЗ 4 - авторизация и формы
+Вход, выход, регистрация и редактирование профиля с загрузкой аватарки. Формы добавления вопроса и ответа. Лайки/дизлайки и отметка правильного ответа работают через AJAX
+
 ### Как запустить
 Сначала создайте файлы с переменными окружения из примера:
 ```
@@ -46,8 +49,14 @@ python manage.py fill_db [ratio] : Добавляет пользователей
 - `/ask/` - задать вопрос
 - `/login/` - вход
 - `/signup/` - регистрация
+- `/logout/` - выход
 - `/profile/` - настройки профиля (тут юзер залогинен)
 - `/admin/` - админка
+
+AJAX (POST, ответ в JSON):
+- `/question/like/` - лайк/дизлайк вопроса, параметры question, value (1 или -1)
+- `/answer/like/` - лайк/дизлайк ответа, параметры answer, value
+- `/answer/correct/` - отметить правильный ответ (только автор вопроса), параметры question, answer
 
 ### Структура
 ```
@@ -65,8 +74,10 @@ python manage.py fill_db [ratio] : Добавляет пользователей
 │   ├── admin.py
 │   ├── apps.py
 │   ├── context_processors.py
+│   ├── forms.py
 │   ├── migrations
 │   │   ├── 0001_initial.py
+│   │   ├── 0002_avatar_upload_to.py
 │   │   └── __init__.py
 │   ├── mock_data.py
 │   ├── models.py
@@ -79,11 +90,14 @@ python manage.py fill_db [ratio] : Добавляет пользователей
 │   │       │   ├── avatar-1.jpg
 │   │       │   └── favicon.png
 │   │       └── js
-│   │           └── bootstrap.js
+│   │           ├── bootstrap.js
+│   │           └── main.js
 │   ├── templates
 │   │   └── core
 │   │       ├── avatar.html
 │   │       ├── base.html
+│   │       ├── form_errors.html
+│   │       ├── form_field.html
 │   │       ├── login.html
 │   │       ├── paginator.html
 │   │       ├── profile.html
@@ -92,7 +106,6 @@ python manage.py fill_db [ratio] : Добавляет пользователей
 │   ├── urls.py
 │   ├── utils.py
 │   └── views.py
-├── db.sqlite3
 ├── docker-compose.yml
 ├── manage.py
 ├── media
@@ -100,6 +113,7 @@ python manage.py fill_db [ratio] : Добавляет пользователей
 │   ├── __init__.py
 │   ├── admin.py
 │   ├── apps.py
+│   ├── forms.py
 │   ├── management
 │   │   ├── __init__.py
 │   │   └── commands
@@ -126,5 +140,5 @@ python manage.py fill_db [ratio] : Добавляет пользователей
 │   └── views.py
 └── requirements.txt
 
-20 directories, 54 files
+20 directories, 59 files
 ```

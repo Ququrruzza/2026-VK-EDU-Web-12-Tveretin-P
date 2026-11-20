@@ -1,5 +1,5 @@
-<div class="rating">
-    <button type="button" class="btn btn-sm {% if item.vote == 'up' %}btn-success{% else %}btn-outline-success{% endif %}" title="Like">&#9650;</button>
+<div class="rating" data-url="{% url like_url %}" data-field="{{ field }}" data-id="{{ item.id }}"{% if not user.is_authenticated %} title="Log in to vote"{% endif %}>
+    <button type="button" class="btn btn-sm js-vote {% if item.user_vote == 1 %}btn-success{% else %}btn-outline-success{% endif %}" data-value="1" title="Like"{% if not user.is_authenticated or item.user_vote == 1 %} disabled{% endif %}>&#9650;</button>
     <span class="rating-count">{{ item.rating }}</span>
-    <button type="button" class="btn btn-sm {% if item.vote == 'down' %}btn-danger{% else %}btn-outline-danger{% endif %}" title="Dislike">&#9660;</button>
+    <button type="button" class="btn btn-sm js-vote {% if item.user_vote == -1 %}btn-danger{% else %}btn-outline-danger{% endif %}" data-value="-1" title="Dislike"{% if not user.is_authenticated or item.user_vote == -1 %} disabled{% endif %}>&#9660;</button>
 </div>

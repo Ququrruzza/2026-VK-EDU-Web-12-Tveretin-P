@@ -5,13 +5,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token }}">
     <title>{% block title %}{% endblock %} - AskPupkin</title>
     <link rel="icon" href="{% static 'core/img/favicon.png' %}">
     <link rel="stylesheet" href="{% static 'core/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
 </head>
 
-<body class="d-flex flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100" data-login-url="{% url 'login' %}">
 
     <header class="border-bottom py-3 mb-4 border-3">
         <div class="container">
@@ -21,18 +22,18 @@
                     <a href="{% url 'index' %}" class="logo">Ask<span>Pupkin</span></a>
                 </div>
 
-                {% if current_user %}
+                {% if user.is_authenticated %}
                 <div class="col-6 col-md-auto order-md-last d-flex align-items-center justify-content-end gap-2">
-                    {% include "core/avatar.html" with person=current_user size="avatar-sm" %}
+                    {% include "core/avatar.html" with person=user.profile size="avatar-sm" %}
                     <div class="small">
-                        <div class="fw-bold">{{ current_user.display_name }}</div>
+                        <div class="fw-bold">{{ user.profile.display_name|default:user.username }}</div>
                         <a href="{% url 'profile' %}" class="me-2">Settings</a>
-                        <a href="{% url 'index' %}">Log out</a>
+                        <a href="{% url 'logout' %}?next={{ request.get_full_path|urlencode }}">Log out</a>
                     </div>
                 </div>
                 {% else %}
                 <div class="col-6 col-md-auto order-md-last text-end">
-                    <a href="{% url 'login' %}" class="me-2">Log in</a>
+                    <a href="{% url 'login' %}?next={{ request.get_full_path|urlencode }}" class="me-2">Log in</a>
                     <a href="{% url 'signup' %}">Register</a>
                 </div>
                 {% endif %}
@@ -40,7 +41,11 @@
                 <div class="col-12 col-md">
                     <form class="d-flex gap-2" action="{% url 'index' %}">
                         <input type="search" class="form-control" name="q" placeholder="Search" aria-label="Search">
+                        {% if user.is_authenticated %}
                         <a href="{% url 'ask' %}" class="btn btn-success text-nowrap">Ask!</a>
+                        {% else %}
+                        <span title="Log in to ask a question"><a class="btn btn-success text-nowrap disabled" aria-disabled="true">Ask!</a></span>
+                        {% endif %}
                     </form>
                 </div>
             </div>
@@ -83,5 +88,6 @@
     </footer>
 
 <script src="{% static 'core/js/bootstrap.js' %}"></script>
+<script src="{% static 'core/js/main.js' %}"></script>
 </body>
 </html>
