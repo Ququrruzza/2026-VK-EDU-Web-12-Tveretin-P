@@ -66,6 +66,7 @@ python manage.py fill_db [ratio] : Добавляет пользователей
 │   ├── apps.py
 │   ├── context_processors.py
 │   ├── migrations
+│   │   ├── 0001_initial.py
 │   │   └── __init__.py
 │   ├── mock_data.py
 │   ├── models.py
@@ -95,15 +96,18 @@ python manage.py fill_db [ratio] : Добавляет пользователей
 ├── docker-compose.yml
 ├── manage.py
 ├── media
-├── public
-│   └── static
 ├── questions
 │   ├── __init__.py
 │   ├── admin.py
 │   ├── apps.py
+│   ├── management
+│   │   ├── __init__.py
+│   │   └── commands
+│   │       ├── __init__.py
+│   │       └── fill_db.py
 │   ├── migrations
+│   │   ├── 0001_initial.py
 │   │   └── __init__.py
-│   ├── mock_data.py
 │   ├── models.py
 │   ├── static
 │   │   └── questions
@@ -122,5 +126,5 @@ python manage.py fill_db [ratio] : Добавляет пользователей
 │   └── views.py
 └── requirements.txt
 
-20 directories, 50 files
+20 directories, 54 files
 ```
