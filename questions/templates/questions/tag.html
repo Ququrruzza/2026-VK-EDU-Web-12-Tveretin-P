@@ -1,9 +1,9 @@
 {% extends "core/base.html" %}
 
-{% block title %}Tag: {{ tag_name }}{% endblock %}
+{% block title %}Tag: {{ tag.name }}{% endblock %}
 
 {% block content %}
-<h2 class="mb-4">Tag: {{ tag_name }}</h2>
+<h2 class="mb-4">Tag: {{ tag.name }}</h2>
 
 {% for question in page %}
 {% include "questions/question_card.html" %}

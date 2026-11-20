@@ -10,6 +10,8 @@
 
     {% for question in page %}
         {% include "questions/question_card.html" %}
+    {% empty %}
+        <p class="text-muted">No questions yet.</p>
     {% endfor %}
 
     {% include "core/paginator.html" %}
