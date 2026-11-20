@@ -1,4 +1,6 @@
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.urls import reverse
+from django.utils.http import url_has_allowed_host_and_scheme
 
 
 def paginate(objects_list, request, per_page=10):
@@ -19,3 +21,10 @@ def paginate(objects_list, request, per_page=10):
         page.number, on_each_side=2, on_ends=1
     )
     return page
+
+def get_next_url(request, default="index"):
+    next_url = request.GET.get("next")
+    # не даём редиректить на чужие сайты (open redirect)
+    if next_url and url_has_allowed_host_and_scheme(next_url, allowed_hosts={request.get_host()}, require_https=request.is_secure()):
+        return next_url
+    return reverse(default)

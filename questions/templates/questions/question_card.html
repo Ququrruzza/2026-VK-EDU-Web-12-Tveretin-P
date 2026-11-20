@@ -3,7 +3,7 @@
     <div class="d-flex gap-3">
     <div class="flex-shrink-0">
         {% include "core/avatar.html" with person=question.author.profile %}
-        {% include "questions/rating.html" with item=question %}
+        {% include "questions/rating.html" with item=question like_url="question_like" field="question" %}
     </div>
     <div class="flex-grow-1">
         <h5 class="question-title"><a href="{{ question.get_absolute_url }}" class="text-decoration-none">{{ question.title }}</a></h5>

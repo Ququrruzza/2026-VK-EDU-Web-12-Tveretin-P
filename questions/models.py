@@ -1,8 +1,10 @@
 from django.contrib.auth.models import User
 from django.db import models
-from django.db.models import Count
+from django.db.models import Count, OuterRef, Subquery
 from django.urls import reverse
 from django.utils import timezone
+
+ANSWERS_PER_PAGE = 5
 
 
 class TagManager(models.Manager):
@@ -28,17 +30,22 @@ class Tag(models.Model):
 
 
 class QuestionManager(models.Manager):
-    def with_related(self):
-        return self.select_related("author__profile").prefetch_related("tags")
+    def with_related(self, user=None):
+        questions = self.select_related("author__profile").prefetch_related("tags")
+        # оценка текущего пользователя, чтобы подсветить нажатую кнопку
+        if user and user.is_authenticated:
+            vote = QuestionLike.objects.filter(user=user, question=OuterRef("pk")).values("value")[:1]
+            questions = questions.annotate(user_vote=Subquery(vote))
+        return questions
 
-    def new(self):
-        return self.with_related().order_by("-created_at")
+    def new(self, user=None):
+        return self.with_related(user).order_by("-created_at")
 
-    def hot(self):
-        return self.with_related().order_by("-rating", "-created_at")
+    def hot(self, user=None):
+        return self.with_related(user).order_by("-rating", "-created_at")
 
-    def by_tag(self, tag):
-        return self.new().filter(tags=tag)
+    def by_tag(self, tag, user=None):
+        return self.new(user).filter(tags=tag)
 
 
 class Question(models.Model):
@@ -64,8 +71,16 @@ class Question(models.Model):
 
 
 class AnswerManager(models.Manager):
-    def for_question(self, question):
-        return self.filter(question=question).select_related("author__profile").order_by("-is_correct", "-rating", "created_at")
+    def for_question(self, question, user=None):
+        answers = self.filter(question=question).select_related("author__profile")
+        if user and user.is_authenticated:
+            vote = AnswerLike.objects.filter(user=user, answer=OuterRef("pk")).values("value")[:1]
+            answers = answers.annotate(user_vote=Subquery(vote))
+        return answers.order_by("-is_correct", "-rating", "created_at", "id")
+
+    def page_number(self, answer):
+        ids = list(self.for_question(answer.question_id).values_list("id", flat=True))
+        return ids.index(answer.id) // ANSWERS_PER_PAGE + 1
 
 
 class Answer(models.Model):
@@ -84,6 +99,11 @@ class Answer(models.Model):
 
     def __str__(self):
         return f"Ответ #{self.id}"
+
+    # ссылка сразу на нужную страницу ответов и на сам ответ
+    def get_absolute_url(self):
+        page = Answer.objects.page_number(self)
+        return f"{reverse('question', args=[self.question_id])}?page={page}#answer-{self.id}"
 
 
 LIKE_CHOICES = [(1, "лайк"), (-1, "дизлайк")]

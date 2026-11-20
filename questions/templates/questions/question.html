@@ -6,7 +6,7 @@
 <div class="d-flex gap-3 mb-4">
 <div class="flex-shrink-0">
     {% include "core/avatar.html" with person=question.author.profile %}
-    {% include "questions/rating.html" with item=question %}
+    {% include "questions/rating.html" with item=question like_url="question_like" field="question" %}
 </div>
 <div class="flex-grow-1">
     <h2 class="question-title">{{ question.title }}</h2>
@@ -34,13 +34,17 @@
 
 <hr>
 
-<form method="post">
+{% if user.is_authenticated %}
+<form method="post" novalidate>
 {% csrf_token %}
-<div class="mb-3">
-    <label for="answer-text" class="form-label fw-bold">Your answer</label>
-    <textarea class="form-control" id="answer-text" name="text" rows="5" maxlength="2000" placeholder="Enter your answer here..."></textarea>
-    <div class="form-text">Up to 2000 characters.</div>
-</div>
+{% include "core/form_field.html" with field=form.text %}
 <button type="submit" class="btn btn-primary">Answer</button>
 </form>
+{% else %}
+<div title="Log in to answer">
+    <textarea class="form-control mb-3" rows="5" placeholder="Log in to answer" disabled></textarea>
+    <button type="button" class="btn btn-primary" disabled>Answer</button>
+</div>
+<p class="mt-2"><a href="{% url 'login' %}?next={{ request.get_full_path|urlencode }}">Log in</a> to answer this question.</p>
+{% endif %}
 {% endblock %}

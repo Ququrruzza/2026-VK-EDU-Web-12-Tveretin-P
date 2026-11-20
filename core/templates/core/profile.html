@@ -3,35 +3,25 @@
 {% block title %}Profile{% endblock %}
 
 {% block content %}
-<h2 class="mb-4">Settings: {{ current_user.display_name }}</h2>
+<h2 class="mb-4">Settings: {{ form.instance.display_name }}</h2>
 
-<div class="alert alert-danger">Profile was not saved. Please fix the errors below.</div>
+{% include "core/form_errors.html" %}
 
-<form method="post" enctype="multipart/form-data" style="max-width: 600px;">
+<form method="post" enctype="multipart/form-data" style="max-width: 600px;" novalidate>
 {% csrf_token %}
 <div class="mb-3">
     <label for="login" class="form-label">Login</label>
-    <input type="text" class="form-control" id="login" name="login" maxlength="30" value="{{ current_user.login }}" disabled>
+    <input type="text" class="form-control" id="login" value="{{ user.username }}" disabled>
     <div class="form-text">Login cannot be changed.</div>
 </div>
-<div class="mb-3">
-    <label for="email" class="form-label">Email</label>
-    <input type="email" class="form-control is-invalid" id="email" name="email" maxlength="100" value="{{ current_user.email }}">
-    <div class="invalid-feedback">Please enter a valid email.</div>
-</div>
-<div class="mb-3">
-    <label for="nickname" class="form-label">Nickname</label>
-    <input type="text" class="form-control" id="nickname" name="nickname" maxlength="30" value="{{ current_user.display_name }}">
-    <div class="form-text">Up to 30 characters.</div>
-</div>
+{% include "core/form_field.html" with field=form.email %}
+{% include "core/form_field.html" with field=form.nickname %}
 
 <div class="mb-3">
-    <label for="avatar" class="form-label">Avatar</label>
     <div class="d-flex flex-wrap align-items-center gap-3">
-    {% include "core/avatar.html" with person=current_user size="avatar-lg" %}
+    {% include "core/avatar.html" with person=form.instance size="avatar-lg" %}
     <div class="flex-grow-1">
-        <input type="file" class="form-control" id="avatar" name="avatar" accept="image/*">
-        <div class="form-text">JPG or PNG, up to 2 MB.</div>
+        {% include "core/form_field.html" with field=form.avatar %}
     </div>
     </div>
 </div>
