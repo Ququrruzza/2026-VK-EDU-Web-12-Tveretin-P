@@ -5,7 +5,7 @@
 {% block content %}
 <div class="d-flex gap-3 mb-4">
 <div class="flex-shrink-0">
-    {% include "core/avatar.html" with person=question.author %}
+    {% include "core/avatar.html" with person=question.author.profile %}
     {% include "questions/rating.html" with item=question %}
 </div>
 <div class="flex-grow-1">
@@ -13,10 +13,10 @@
     <p class="card-text">{{ question.text }}</p>
     <div class="d-flex flex-wrap align-items-center gap-2 small">
     <span class="text-muted">Tags:</span>
-    {% for tag in question.tags %}
-    <a href="{% url 'tag' tag %}" class="badge text-bg-primary text-decoration-none">{{ tag }}</a>
+    {% for tag in question.tags.all %}
+    <a href="{{ tag.get_absolute_url }}" class="badge text-bg-primary text-decoration-none">{{ tag.name }}</a>
     {% endfor %}
-    <span class="text-muted ms-auto">Asked {{ question.created }} by <a href="#">{{ question.author.name }}</a></span>
+    <span class="text-muted ms-auto">Asked {{ question.created_at|date:"d.m.Y H:i" }} by <a href="#">{{ question.author.profile.display_name }}</a></span>
     </div>
 </div>
 </div>

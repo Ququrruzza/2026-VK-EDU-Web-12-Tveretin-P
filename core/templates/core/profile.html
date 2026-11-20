@@ -3,7 +3,7 @@
 {% block title %}Profile{% endblock %}
 
 {% block content %}
-<h2 class="mb-4">Settings: {{ current_user.name }}</h2>
+<h2 class="mb-4">Settings: {{ current_user.display_name }}</h2>
 
 <div class="alert alert-danger">Profile was not saved. Please fix the errors below.</div>
 
@@ -21,7 +21,7 @@
 </div>
 <div class="mb-3">
     <label for="nickname" class="form-label">Nickname</label>
-    <input type="text" class="form-control" id="nickname" name="nickname" maxlength="30" value="{{ current_user.name }}">
+    <input type="text" class="form-control" id="nickname" name="nickname" maxlength="30" value="{{ current_user.display_name }}">
     <div class="form-text">Up to 30 characters.</div>
 </div>
 

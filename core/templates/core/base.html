@@ -25,7 +25,7 @@
                 <div class="col-6 col-md-auto order-md-last d-flex align-items-center justify-content-end gap-2">
                     {% include "core/avatar.html" with person=current_user size="avatar-sm" %}
                     <div class="small">
-                        <div class="fw-bold">{{ current_user.name }}</div>
+                        <div class="fw-bold">{{ current_user.display_name }}</div>
                         <a href="{% url 'profile' %}" class="me-2">Settings</a>
                         <a href="{% url 'index' %}">Log out</a>
                     </div>
@@ -57,14 +57,18 @@
                 <h3 class="mb-3">Popular Tags</h3>
                 <ul class="tag-cloud list-unstyled mb-3 w-75">
                     {% for tag in popular_tags %}
-                        <li><a href="{% url 'tag' tag.name %}" class="{{ tag.css }}">{{ tag.name }}</a></li>
+                        <li><a href="{{ tag.get_absolute_url }}" class="{% cycle 'text-danger fs-5' 'text-secondary' 'text-success' 'text-dark' %}">{{ tag.name }}</a></li>
+                    {% empty %}
+                        <li class="text-muted">No tags yet.</li>
                     {% endfor %}
                 </ul>
 
                 <h3 class="mb-3">Best Members</h3>
                 <ul class="list-unstyled mb-0">
                     {% for member in best_members %}
-                        <li{% if not forloop.last %} class="mb-2"{% endif %}><a href="#">{{ member.name }}</a></li>
+                        <li{% if not forloop.last %} class="mb-2"{% endif %}><a href="#">{{ member.display_name }}</a></li>
+                    {% empty %}
+                        <li class="text-muted">No members yet.</li>
                     {% endfor %}
                 </ul>
             </aside>

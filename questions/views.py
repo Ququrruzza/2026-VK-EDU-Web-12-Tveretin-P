@@ -1,33 +1,32 @@
-from django.shortcuts import render
-from django.http import Http404
+from django.shortcuts import get_object_or_404, render
+
 from core.utils import paginate
-from .mock_data import QUESTIONS, get_answers
+from .models import Answer, Question, Tag
 # Create your views here.
 
+def questions_list(request, template, questions, context=None):
+    context = context or {}
+    context["page"] = paginate(questions, request)
+    return render(request, template, context)
+
+
 def index(request):
-    page = paginate(QUESTIONS, request)
-    return render(request, "questions/index.html", {"page": page})
+    return questions_list(request, "questions/index.html", Question.objects.new())
 
 
 def hot(request):
-    hot_questions = sorted(QUESTIONS, key=lambda question: question["rating"], reverse=True)
-    page = paginate(hot_questions, request)
-    return render(request, "questions/hot.html", {"page": page})
+    return questions_list(request, "questions/hot.html", Question.objects.hot())
 
 
 def tag(request, tag_name):
-    tagged_questions = [question for question in QUESTIONS if tag_name in question["tags"]]
-    page = paginate(tagged_questions, request)
-    return render(request, "questions/tag.html", {"page": page, "tag_name": tag_name})
+    tag = get_object_or_404(Tag, name=tag_name)
+    return questions_list(request, "questions/tag.html", Question.objects.by_tag(tag), {"tag": tag})
 
 
 def question(request, question_id):
-    if not 1 <= question_id <= len(QUESTIONS):
-        raise Http404("Question not found")
-
-    current_question = QUESTIONS[question_id - 1]
-    page = paginate(get_answers(current_question), request, per_page=5)
-    return render(request, "questions/question.html", {"question": current_question, "page": page})
+    question = get_object_or_404(Question.objects.with_related(), id=question_id)
+    page = paginate(Answer.objects.for_question(question), request, per_page=5)
+    return render(request, "questions/question.html", {"question": question, "page": page})
 
 
 def ask(request):
